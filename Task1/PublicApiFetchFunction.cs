@@ -67,7 +67,7 @@ public class PublicApiFetchFunction
         {
             await _logTableRepository.SaveAsync(statusCode, dateTime, null);
 
-            logger.LogDebug("F with payload: {payload}", payload);
+            logger.LogDebug("Failure with payload: {payload}", payload);
         }
     }
 
