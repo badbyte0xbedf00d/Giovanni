@@ -50,11 +50,7 @@ public class WeatherBackgroundService: IWeatherBackgroundService
 
                 var weatherDto = await _weatherFetchService.FetchWeatherAsync(weatherPosition.City, weatherPosition.Country, cancellationToken);
 
-                _logger.LogInformation(
-                    JsonSerializer.Serialize(weatherDto));
-
                 await _weatherRepository.SaveAsync(weatherDto, cancellationToken);
-
                 await Task.Delay(2500, cancellationToken);
             }
             
