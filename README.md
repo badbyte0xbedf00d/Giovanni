@@ -18,4 +18,10 @@ Task 1 contains Azure function with 3 functions inside named:
 - PublicApiFetchFunction-HttpGetLogs
 - PublicApiFetchFunction-HttpGetPayload
 
+## TASK 2
+
+1. Start backend in Debug mode - ```Giovanni.Task2 - C# ASP CORE 6``` (edit your SqlServer connection in appsettings.Development.json, migrations and database will be created by EF CORE).
+2. Navigate to ```./Task2/WebApp/giovanniweather``` and type ```npm install``` then ```npm start``` to start React app.
+3. WIP - Trends are not shown yet on click on bar.
+
 ## Thanks and Happy review !
