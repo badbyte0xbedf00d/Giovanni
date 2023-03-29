@@ -14,7 +14,7 @@ const useWeatherData = (url) => {
     };
 
     fetchData();
-    const interval = setInterval(fetchData, 1000);
+    const interval = setInterval(fetchData, 60 * 1000);
     return () => clearInterval(interval);
   }, [url]);
 
