@@ -7,7 +7,7 @@ import useWeatherData from './data/useWeatherData';
 import './App.css';
 
 const App = () => {
-  const data = useWeatherData('https://localhost:7072/WeatherForecast');
+  const data = useWeatherData('https://localhost:7072/WeatherForecast/GetWeatherForecast');
 
   const lineChartData = {
     data: [

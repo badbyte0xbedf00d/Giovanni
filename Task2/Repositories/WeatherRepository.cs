@@ -8,10 +8,13 @@ using NodaTime;
 namespace Giovanni.Task2.Repositories;
 
 public interface IWeatherRepository
-{
-    public Task SaveAsync(WeatherInfo weatherInfo, CancellationToken cancellationToken = default);
-    public Task<IQueryable<Weather>> GetLastCountriesWeatherAsync(CancellationToken cancellationToken = default);
+{ 
+    Task SaveAsync(WeatherInfo weatherInfo, CancellationToken cancellationToken = default); 
+    Task<IQueryable<Weather>> GetLastCountriesWeatherAsync(CancellationToken cancellationToken = default);
+    Task<IQueryable<Weather>> GetCityWeatherByDateTimeRange(string country, string city, DateTime from, DateTime to,
+        CancellationToken cancellationToken = default);
 }
+
 public class WeatherRepository: IWeatherRepository
 {
     private readonly ILogger<WeatherRepository> _logger;
@@ -83,5 +86,13 @@ public class WeatherRepository: IWeatherRepository
         return await Task.FromResult(_dbContext.Weathers.Include(w => w.City).ThenInclude(c => c.Country)
             .GroupBy(w => w.CityId)
             .Select(g => g.OrderByDescending(w => w.Timestamp).FirstOrDefault()).AsNoTracking());
+    }
+
+    public async Task<IQueryable<Weather>> GetCityWeatherByDateTimeRange(string country, string city, DateTime from, DateTime to,
+        CancellationToken cancellationToken = default)
+    {
+        return await Task.FromResult(_dbContext.Weathers.Include(w => w.City).ThenInclude(c => c.Country)
+            .Where(w => w.City.Country.Name == country && w.City.Name == city)
+            .OrderBy(w => w.Timestamp).Where(w => w.Timestamp >= from && w.Timestamp <= to).AsNoTracking());
     }
 }

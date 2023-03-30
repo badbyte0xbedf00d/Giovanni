@@ -20,3 +20,12 @@ public record WeatherDescriptionOutputDto
     public double Wind { get; init; }
     public DateTime LastUpdateDateTime { get; init; }
 }
+
+public record CountryCityWeatherDescriptionOutputDto
+{
+    public string CountryName { get; init; }
+    public string CityName { get; init; }
+    public double AvgTemperature { get; init; }
+    public double AvgWind { get; init; }
+    public DateTime AvgUpdateDateTime { get; init; }
+}
